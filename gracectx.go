@@ -16,7 +16,7 @@ func New(parent context.Context) (context.Context, context.CancelFunc) {
 
 	ch := make(chan os.Signal, 1)
 	go func() {
-		signal.Notify(ch, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+		signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
 		<-ch
 		cancel()
 	}()
