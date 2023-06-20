@@ -8,10 +8,6 @@ import (
 )
 
 func New(parent context.Context) (context.Context, context.CancelFunc) {
-	if parent == nil {
-		panic("cannot create context from nil parent")
-	}
-
 	ctx, cancel := context.WithCancel(parent)
 
 	ch := make(chan os.Signal, 1)
@@ -24,6 +20,7 @@ func New(parent context.Context) (context.Context, context.CancelFunc) {
 	return ctx, cancel
 }
 
-func Background() (context.Context, context.CancelFunc) {
-	return New(context.Background())
+func Background() context.Context {
+	ctx, _ := New(context.Background())
+	return ctx
 }
