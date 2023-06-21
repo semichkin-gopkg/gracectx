@@ -11,8 +11,6 @@ import (
 )
 
 func main() {
-	gracefulShutdownCtx := gracectx.Background()
-
 	srv := &http.Server{
 		Addr: ":8000",
 	}
@@ -22,7 +20,7 @@ func main() {
 		}
 	}()
 
-	<-gracefulShutdownCtx.Done()
+	<-gracectx.Background().Done()
 	_ = srv.Shutdown(context.Background())
 }
 
