@@ -11,8 +11,7 @@ import (
 )
 
 func main() {
-	gracefulShutdownCtx, cancel := gracectx.Background()
-	defer cancel()
+	gracefulShutdownCtx := gracectx.Background()
 
 	srv := &http.Server{
 		Addr: ":8000",
